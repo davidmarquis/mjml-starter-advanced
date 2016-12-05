@@ -1,0 +1,12 @@
+# IDE #
+.idea/
+*.swp
+*.iml
+*.ipr
+*.iws
+
+*.log
+
+node_modules/
+output/
+build/

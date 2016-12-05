@@ -1,0 +1,10 @@
+{% block content %}{% endblock %}
+------------------------
+_(messages.footer.from)
+
+_(messages.footer.account):  https://www.disney.com
+_(messages.footer.unsubscribe):  https://www.disney.com/unsubscribe
+_(messages.footer.about):  https://www.disney.com
+
+_(messages.footer.company.line1)
+_(messages.footer.company.line2)

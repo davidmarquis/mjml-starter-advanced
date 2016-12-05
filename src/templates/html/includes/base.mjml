@@ -1,0 +1,41 @@
+<mjml>
+    <mj-head>
+        <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto" />
+        <mj-attributes>
+            <mj-class name="preheader" font-size="10px" color="#bfbfbf" line-height="auto"/>
+            <mj-class name="footer" font-size="11px" color="#bfbfbf" line-height="auto"/>
+            <mj-all font-family="Roboto, Arial" font-size="14px"/>
+            {% block extrahead %}{% endblock %}
+        </mj-attributes>
+    </mj-head>
+    <mj-body>
+        <mj-container background-color="#f5f5f5">
+            <mj-section background-color="#f5f5f5" padding="8px 0">
+                <mj-text mj-class="preheader">{% block preheader %}{% endblock %}</mj-text>
+            </mj-section>
+            <mj-section background-color="#f5f5f5">
+                {% block logo %}<mj-image width="100" src="$IMGBASE$/logo.png" />{% endblock %}
+            </mj-section>
+
+            {% block content %}{% endblock %}
+
+            <mj-section background-color="#f5f5f5">
+                <mj-text>
+                    <a href="https://www.disney.com">_(messages.footer.account)</a> |
+                    <a href="https://www.disney.com/unsubscribe">_(messages.footer.unsubscribe)</a> |
+                    <a href="https://www.disney.com">_(messages.footer.about)</a>
+                </mj-text>
+                <mj-spacer height="16px" />
+                <mj-text mj-class="footer">
+                    _(messages.footer.from)
+                </mj-text>
+                <mj-spacer height="16px" />
+                <mj-text mj-class="footer">
+                    _(messages.footer.company.line1)<br/>
+                    _(messages.footer.company.line2)
+                </mj-text>
+            </mj-section>
+
+        </mj-container>
+    </mj-body>
+</mjml>

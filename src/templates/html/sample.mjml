@@ -1,0 +1,14 @@
+{% extends "includes/base.mjml" %}
+{% block preheader %}_(messages.sample.preheader){% endblock %}
+
+{% block content %}
+    <mj-section background-color="white" padding="20px">
+        <mj-text>
+            <h2>_(messages.sample.title)</h2>
+            <p>_(messages.sample.content)</p>
+        </mj-text>
+        <mj-button background-color="#f45e43" color="white" href="http://www.break.com/">
+            _(messages.sample.action)
+        </mj-button>
+    </mj-section>
+{% endblock %}

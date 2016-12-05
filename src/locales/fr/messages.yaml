@@ -1,0 +1,14 @@
+sample:
+  preheader: "Vous avez reçu ce courriel parce que nous devons vérifier votre adresse courriel."
+  title: "Bienvenue sur YourBrand !"
+  content: "Merci d'avoir ouvert un compte sur notre site ! Nous espérons que vous allez l'aimer !"
+  action: "Ne pas cliquer ici"
+
+footer:
+  from: "Envoyé par YourBrand"
+  about: "À propos"
+  unsubscribe: "Se désabonner"
+  account: "Mon compte"
+  company:
+    line1:  "© 2016 YourBrand inc."
+    line2:  "1600 Amphitheatre Parkway, Mountain View, CA  94043"

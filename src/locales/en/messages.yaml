@@ -1,0 +1,14 @@
+sample:
+  preheader: "You have received this email because we need to verify your email address"
+  title: "Welcome to YourBrand!"
+  content: "Thanks for joining our site! We hope you'll enjoy it!"
+  action: "Do not click here"
+
+footer:
+  from: "Sent by YourBrand"
+  about: "About"
+  unsubscribe: "Unsubscribe"
+  account: "My Account"
+  company:
+    line1:  "© 2016 YourBrand inc."
+    line2:  "1600 Amphitheatre Parkway, Mountain View, CA  94043"

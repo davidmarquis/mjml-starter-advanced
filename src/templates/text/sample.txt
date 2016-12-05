@@ -1,0 +1,9 @@
+{% extends "includes/base.txt" %}
+
+{% block content -%}
+_(messages.sample.content)
+
+_(messages.sample.action)
+http://www.break.com/
+
+{% endblock %}
