@@ -9,6 +9,7 @@ The actual use of the output files is out of this tool's scope. Your application
 The tool has the following features:
 
  - HTML Email Templates based on [MJML](https://mjml.io) v3
+ - Support for both HTML and text versions of your emails (with complete control over the text version)
  - LiveReload to see changes to HTML emails in near realtime in the browser. 
  - Composition/reuse with template inheritance via Nunjucks templates
  - Internationalisation support (i18n)
