@@ -26,7 +26,7 @@
     "gulp-replace": "^0.5.4",
     "mjml": "3.0.2",
     "mjml-core": "3.0.2",
-    "mjml-serve": "0.0.4",
+    "mjml-serve": "0.0.7",
     "yargs": "^6.2.0"
   }
 }
