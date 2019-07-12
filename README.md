@@ -16,19 +16,23 @@ The tool has the following features:
 
 ## How to run this?
 
+> Consider using `nvm` to manage multiple Node versions on your system. 
+
 Pre-requisites: 
 
- - Node.js with NPM
+ - Node (v10) with NPM
  
 Preparing your machine:
 
+    $ npm install gulp -g                   # if needed
     $ npm install
 
 Build and start a LiveReload-enabled server for local development:
 
     $ gulp
     
-Then hit [http://localhost:1980](http://localhost:1980) to see a listing of all the output files. Any file can be open in the browser and every HTML file will be reloaded as you make changes in sources.
+Then hit [http://localhost:1980](http://localhost:1980) to see a listing of all the output files. 
+Any file can be open in the browser and every HTML file will be reloaded as you make changes in sources.
 
 ## Building for production
 
