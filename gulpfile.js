@@ -16,9 +16,9 @@ const production = environments.production;
 
 const mjmlEngine = require('mjml');
 
-let imageBase = production() ? config.imageBase : './assets';
-if (!imageBase) throw new Error(`Empty imageBase in config.js`)
-if (imageBase.endsWith('/')) imageBase = imageBase.replace(/\/$/, "") // remove trailing slash
+let assetBaseUrl = production() ? config.assetBaseUrl : './assets';
+if (!assetBaseUrl) throw new Error(`Empty assetBaseUrl in config.js`)
+if (assetBaseUrl.endsWith('/')) assetBaseUrl = assetBaseUrl.replace(/\/$/, "") // remove trailing slash
 
 const argOutput = argv.out || './output';
 
@@ -52,8 +52,10 @@ gulp.task('copy:assets', function () {
 gulp.task('build:html', function () {
     return gulp.src(files.templates)
         .pipe(nunjucks.compile({
-            assetBaseUrl: imageBase
-        }, { searchPath: dirs.templates }))
+            assetBaseUrl
+        }, {
+            searchPath: dirs.templates
+        }))
         .pipe(mjml(mjmlEngine, {
             minify: false,
             filePath: dirs.templates,
@@ -69,7 +71,11 @@ gulp.task('build:html', function () {
 
 gulp.task('build:text', function () {
     return gulp.src(files.templates_text)
-        .pipe(nunjucks.compile({}, { searchPath: dirs.templates_text }))
+        .pipe(nunjucks.compile({
+            assetBaseUrl
+        }, {
+            searchPath: dirs.templates_text
+        }))
         .pipe(i18n({
             langDir: dirs.locales,
             langRegExp: I18N_REGEX,

@@ -52,7 +52,7 @@ __`--out`__: Replaces the default output directory (`./output`) with the one pro
  
 A `config.js` file exists to provide configuration parameters for the build. The following attribute is supported:
 
- - **`imageBase`**: The absolute URL where images are to be accessible publicly.
+ - **`assetBaseUrl`**: The absolute URL where images are to be accessible publicly.
 
 
 ## About images
@@ -71,7 +71,7 @@ This would refer to an image stored in the following directory: `src/assets/logo
 
 It is not part of the scope of this tool to sync or upload images to a public hosting environment. All the tool does is repatriate every image file under the `src/assets` directory into the `output/assets` directory when building the project. Those files should then be uploaded/synced to a Web server serving static files.
 
-When building templates for production (see _Building for production_ below), the `$IMGBASE$` variables will be replaced by the `imageBase` configuration attribute in `config.js`.
+When building templates for production (see _Building for production_ below), the `$IMGBASE$` variables will be replaced by the `assetBaseUrl` configuration attribute in `config.js`.
 
 ## About translations / i18n
 
