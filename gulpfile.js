@@ -86,17 +86,17 @@ gulp.task('build:text', function () {
 
 gulp.task('build', gulp.series(['clean', 'copy:assets', 'build:text', 'build:html']));
 
-gulp.task('watch', gulp.series(['build'], function () {
+gulp.task('watch', function () {
     gulp.watch([files.templates_all, files.assets, files.locales], gulp.series(['build:html']));
     gulp.watch([files.templates_text_all, files.locales], gulp.series(['build:text']));
-}));
+});
 
-gulp.task('server', function () {
+gulp.task('server', gulp.series(['build'], gulp.parallel(['watch'], function () {
     connect.server({
         root: dirs.output,
         port: 1980,
         livereload: true
     });
-});
+})));
 
-gulp.task('default', gulp.parallel(['server', 'watch']));
+gulp.task('default', gulp.parallel(['server'/* , 'watch' */]));
