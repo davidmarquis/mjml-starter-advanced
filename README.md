@@ -59,19 +59,19 @@ A `config.js` file exists to provide configuration parameters for the build. The
 
 Images in emails are expected to be hosted on a public web server (ex: S3). This tool does not embed images into emails.
 
-As a convenience for developers when working locally (more specifically using the `development` environment), the image paths will be adjusted so that they point to the local file instead of a fully absolute URL. For that process to work, the `$IMGPATH$` replacement pattern needs to be prepended to all references to images in any of the `.mjml` templates.
+As a convenience for developers when working locally (more specifically using the `development` environment), the image paths will be adjusted so that they point to the local file instead of a fully absolute URL. For that process to work, the `[$ assetBaseUrl $]` replacement pattern needs to be prepended to all references to images in any of the `.mjml` templates.
 
 Example:
 
-    <mj-image width="100" src="$IMGBASE$/logo.gif" />
+    <mj-image width="100" src="[$ assetBaseUrl $]/logo.gif" />
     
 This would refer to an image stored in the following directory: `src/assets/logo.gif`.
 
-**Note**: Usage of the `$IMGBASE$` pattern is not required if your images are already on a public server.
+**Note**: Usage of the `[$ assetBaseUrl $]` pattern is not required if your images are already on a public server.
 
 It is not part of the scope of this tool to sync or upload images to a public hosting environment. All the tool does is repatriate every image file under the `src/assets` directory into the `output/assets` directory when building the project. Those files should then be uploaded/synced to a Web server serving static files.
 
-When building templates for production (see _Building for production_ below), the `$IMGBASE$` variables will be replaced by the `assetBaseUrl` configuration attribute in `config.js`.
+When building templates for production (see _Building for production_ below), the `[$ assetBaseUrl $]` variables will be replaced by the `assetBaseUrl` configuration attribute in `config.js`.
 
 ## About translations / i18n
 
@@ -107,6 +107,19 @@ Without the `{% raw %}` escape tag, the output would be
     <p></p>
  
 This is because Nunjucks tries to substitute the `{{ some_dynamic_variable }}` placeholder with a variable from its context. Because there is no such variable, the output is simply empty.
+
+#### Alternative option: Change Nunjucks syntax
+Nunjucks allows [configurable syntax](https://mozilla.github.io/nunjucks/api.html#customizing-syntax), e.g. `[% %]` (better than `<%` because of html parsers):
+```json
+tags: { // As we also want to use Blade templates at runtime, we use a different syntax for Nunjucks (blade sadly doesn't support changing the syntax)
+    blockStart: '[%',
+    blockEnd: '%]',
+    variableStart: '[$',
+    variableEnd: '$]',
+    commentStart: '[#',
+    commentEnd: '#]'
+}
+```
 
 ## Caveats
 
