@@ -1,4 +1,4 @@
 module.exports = {
-    // This is where your images are to be hosted publicly
-    imageBase: 'https://www.yourbrand.com/images',   // must NOT end with a slash
+    // This is where your images are to be hosted publicly - e.g. 'https://domain.org/images'
+    imageBase: process.env.EMAIL_ASSET_URL,
 };
