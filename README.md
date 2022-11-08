@@ -52,34 +52,34 @@ __`--out`__: Replaces the default output directory (`./output`) with the one pro
  
 A `config.js` file exists to provide configuration parameters for the build. The following attribute is supported:
 
- - **`imageBase`**: The absolute URL where images are to be accessible publicly.
+ - **`assetBaseUrl`**: The absolute URL where images are to be accessible publicly.
 
 
 ## About images
 
 Images in emails are expected to be hosted on a public web server (ex: S3). This tool does not embed images into emails.
 
-As a convenience for developers when working locally (more specifically using the `development` environment), the image paths will be adjusted so that they point to the local file instead of a fully absolute URL. For that process to work, the `$IMGPATH$` replacement pattern needs to be prepended to all references to images in any of the `.mjml` templates.
+As a convenience for developers when working locally (more specifically using the `development` environment), the image paths will be adjusted so that they point to the local file instead of a fully absolute URL. For that process to work, the `[$ assetBaseUrl $]` replacement pattern needs to be prepended to all references to images in any of the `.mjml` templates.
 
 Example:
 
-    <mj-image width="100" src="$IMGBASE$/logo.gif" />
+    <mj-image width="100" src="[$ assetBaseUrl $]/logo.gif" />
     
 This would refer to an image stored in the following directory: `src/assets/logo.gif`.
 
-**Note**: Usage of the `$IMGBASE$` pattern is not required if your images are already on a public server.
+**Note**: Usage of the `[$ assetBaseUrl $]` pattern is not required if your images are already on a public server.
 
 It is not part of the scope of this tool to sync or upload images to a public hosting environment. All the tool does is repatriate every image file under the `src/assets` directory into the `output/assets` directory when building the project. Those files should then be uploaded/synced to a Web server serving static files.
 
-When building templates for production (see _Building for production_ below), the `$IMGBASE$` variables will be replaced by the `imageBase` configuration attribute in `config.js`.
+When building templates for production (see _Building for production_ below), the `[$ assetBaseUrl $]` variables will be replaced by the `assetBaseUrl` configuration attribute in `config.js`.
 
 ## About translations / i18n
 
-The output of the tool is a different version of each email in both HTML and text version, in all languages that have a corresponding `messages.yaml` file under the `src/locales/[LANG]` directory.
+The output of the tool is a different version of each email in both HTML and text version, in all languages that have a corresponding `X.yaml` files under the `src/locales/[LANG]` directory.
 
-The `messages.yaml` files is a simple hierarchical data structure that maps keys to the actual value in a specific language.
+The `FILENAME.yaml` files are a simple hierarchical data structure that maps keys to the actual value in a specific language.
 
-To use translated strings in emails, use the following delimiter: `_(messages.[KEY])`, where `[KEY]` is the dot-delimited path that leads to the string you want in `messages.yaml`.
+To use translated strings in emails, use the following delimiter: `_(FILENAME.[KEY])`, where `[KEY]` is the dot-delimited path that leads to the string you want in `FILENAME.yaml`.
 
 For example, given a `messages.yaml` file under `src/locales/en` with the following contents:
 
@@ -107,6 +107,19 @@ Without the `{% raw %}` escape tag, the output would be
     <p></p>
  
 This is because Nunjucks tries to substitute the `{{ some_dynamic_variable }}` placeholder with a variable from its context. Because there is no such variable, the output is simply empty.
+
+#### Alternative option: Change Nunjucks syntax
+Nunjucks allows [configurable syntax](https://mozilla.github.io/nunjucks/api.html#customizing-syntax), e.g. `[% %]` (better than `<%` because of html parsers):
+```json
+tags: { // As we also want to use Blade templates at runtime, we use a different syntax for Nunjucks (blade sadly doesn't support changing the syntax)
+    blockStart: '[%',
+    blockEnd: '%]',
+    variableStart: '[$',
+    variableEnd: '$]',
+    commentStart: '[#',
+    commentEnd: '#]'
+}
+```
 
 ## Caveats
 
@@ -143,7 +156,7 @@ A possible solution is to remove some levels of nesting and get rid of the `mj-c
  1. Encode your email contents as Base64 when sending them, which will naturally break lines but with a cost of about 20-30% increase on email size.
  2. Encode your email contents with [`quoted-printable`](https://en.wikipedia.org/wiki/Quoted-printable)
  
-### `mj-include` tag not properly working 
+### `mj-include` tag
 
-The `<mj-include>` MJML tag does not currently work as there is an issue with the way it tries to find the  files included.
+The `<mj-include>` MJML tag needs paths relative to `src/templates/html`
  
