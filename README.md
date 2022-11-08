@@ -75,11 +75,11 @@ When building templates for production (see _Building for production_ below), th
 
 ## About translations / i18n
 
-The output of the tool is a different version of each email in both HTML and text version, in all languages that have a corresponding `messages.yaml` file under the `src/locales/[LANG]` directory.
+The output of the tool is a different version of each email in both HTML and text version, in all languages that have a corresponding `X.yaml` files under the `src/locales/[LANG]` directory.
 
-The `messages.yaml` files is a simple hierarchical data structure that maps keys to the actual value in a specific language.
+The `FILENAME.yaml` files are a simple hierarchical data structure that maps keys to the actual value in a specific language.
 
-To use translated strings in emails, use the following delimiter: `_(messages.[KEY])`, where `[KEY]` is the dot-delimited path that leads to the string you want in `messages.yaml`.
+To use translated strings in emails, use the following delimiter: `_(FILENAME.[KEY])`, where `[KEY]` is the dot-delimited path that leads to the string you want in `FILENAME.yaml`.
 
 For example, given a `messages.yaml` file under `src/locales/en` with the following contents:
 
@@ -156,7 +156,7 @@ A possible solution is to remove some levels of nesting and get rid of the `mj-c
  1. Encode your email contents as Base64 when sending them, which will naturally break lines but with a cost of about 20-30% increase on email size.
  2. Encode your email contents with [`quoted-printable`](https://en.wikipedia.org/wiki/Quoted-printable)
  
-### `mj-include` tag not properly working 
+### `mj-include` tag
 
-The `<mj-include>` MJML tag does not currently work as there is an issue with the way it tries to find the  files included.
+The `<mj-include>` MJML tag needs paths relative to `src/templates/html`
  
